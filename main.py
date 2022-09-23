@@ -8,7 +8,7 @@ from datetime import date, datetime
 from pytrends.request import TrendReq
 import logging
 import csv
-
+from dateutil.relativedelta import relativedelta
 
 def save_csv(daily, monthly, path):
     
@@ -80,16 +80,30 @@ def get_monthly():
     return hits_all 
 
 def main():
-    time_ranges = ['2021-01-01 2021-01-31', '2021-02-01 2021-02-28', '2021-03-01 2021-03-31',
-                   '2021-04-01 2021-04-30', '2021-05-01 2021-05-31', '2021-06-01 2021-06-30',
-                   '2021-07-01 2021-07-31', '2021-08-01 2021-08-31', '2021-09-01 2021-09-30',
-                   '2021-10-01 2021-10-31', '2021-11-01 2021-11-30', '2021-12-01 2021-12-31',
-                   '2022-01-01 2022-01-31', '2022-02-01 2022-02-28', '2022-03-01 2022-03-31',
-                   '2022-04-01 2022-04-30', '2022-05-01 2022-05-31', '2022-06-01 2022-06-30',
-                   '2022-07-01 2022-07-31', '2022-08-01 2022-08-31', '2022-09-01 2022-09-30',
-                   '2022-10-01 2022-10-31', '2022-11-01 2022-11-31', '2022-12-01 2022-09-31']
+    
+    PERIODOS = pd.date_range(
+        '2020-01-01',
+        date.today().strftime(
+            "%Y-%m-%d"
+        ),
+        freq='MS'
+    ).strftime(
+        "%Y-%m-%d"
+    ).tolist()
 
-    daily = get_hits(time_ranges)
+    for i in range(len(PERIODOS)):
+        first_date = PERIODOS[i]
+        last_day = (
+            datetime.strptime(
+                first_date, 
+                "%Y-%m-%d"
+            ) + relativedelta(months=+1) + relativedelta(days=-1)
+            ).strftime(
+            "%Y-%m-%d"
+        )
+        PERIODOS[i] = first_date + " " + last_day
+        
+    daily = get_hits(PERIODOS)
     monthly = get_monthly()
     print(daily, monthly)
     save_csv(daily,monthly,r'D:\Tabelas\gtrends.csv')
