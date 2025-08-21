@@ -1,0 +1,1 @@
+"""Tests for Google Trends Analyzer."""
