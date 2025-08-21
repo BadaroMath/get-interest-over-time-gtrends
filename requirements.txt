@@ -1,0 +1,42 @@
+# Core dependencies
+pandas>=1.5.0
+pytrends>=4.9.0
+python-dateutil>=2.8.0
+
+# Data processing
+numpy>=1.21.0
+openpyxl>=3.0.9  # For Excel export
+
+# Google Cloud
+google-cloud-bigquery>=3.0.0
+google-auth>=2.0.0
+
+# Configuration management
+PyYAML>=6.0
+pydantic>=1.10.0
+
+# CLI and utilities
+click>=8.0.0
+rich>=12.0.0  # Beautiful CLI output
+tabulate>=0.9.0
+
+# Logging and monitoring
+structlog>=22.0.0
+
+# Development dependencies (optional)
+pytest>=7.0.0
+pytest-cov>=4.0.0
+black>=22.0.0
+flake8>=5.0.0
+mypy>=0.991
+pre-commit>=2.20.0
+
+# Optional dependencies for additional formats
+pyarrow>=10.0.0  # For Parquet export
+sqlalchemy>=1.4.0  # For database exports
+psycopg2-binary>=2.9.0  # PostgreSQL support
+pymongo>=4.0.0  # MongoDB support
+
+# Web API (optional)
+fastapi>=0.85.0
+uvicorn>=0.18.0
