@@ -358,21 +358,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [pytrends](https://github.com/GeneralMills/pytrends) - Google Trends API wrapper
 - [pandas](https://pandas.pydata.org/) - Data manipulation and analysis
-- [Google Cloud BigQuery](https://cloud.google.com/bigquery) - Cloud data warehouse
-
-## 📞 **Support**
-
-- 📧 Email: support@trends-analyzer.com
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/google-trends-analyzer/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/google-trends-analyzer/discussions)
-- 📖 Documentation: [Full Documentation](https://trends-analyzer.readthedocs.io/)
+- [Google Cloud BigQuery](https://cloud.google.com/bigquery) - Cloud DWH
 
 ---
 
 <div align="center">
 
 **⭐ Star this repository if it helped you! ⭐**
-
-Made with ❤️ by [Your Name](https://github.com/yourusername)
 
 </div>
