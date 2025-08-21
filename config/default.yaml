@@ -1,0 +1,30 @@
+# Google Trends Analyzer - Default Configuration
+
+analyzer:
+  default_geo: 'US'
+  default_timeframe: 'today 3-m'
+  retry_attempts: 5
+  timeout: 30
+  cache_enabled: true
+  cache_dir: './cache'
+  delay_between_requests: 1.0
+
+logging:
+  level: 'INFO'
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  file: null  # Set to filename to enable file logging
+  console: true
+
+export:
+  default_format: 'csv'
+  include_metadata: true
+  timestamp_columns: true
+  output_dir: './results'
+
+bigquery:
+  project_id: null  # Set your Google Cloud project ID
+  dataset_id: 'trends_data'
+  location: 'US'
+  write_disposition: 'WRITE_TRUNCATE'
+  credentials_path: null  # Path to service account JSON file
+  credentials_json: null  # Service account JSON as string

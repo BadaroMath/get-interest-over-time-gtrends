@@ -1,0 +1,30 @@
+# Google Trends Analyzer - Production Configuration
+
+analyzer:
+  default_geo: 'US'
+  default_timeframe: 'today 12-m'
+  retry_attempts: 10
+  timeout: 60
+  cache_enabled: true
+  cache_dir: '/tmp/trends_cache'
+  delay_between_requests: 2.0
+
+logging:
+  level: 'INFO'
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s'
+  file: '/var/log/trends_analyzer.log'
+  console: false
+
+export:
+  default_format: 'bigquery'
+  include_metadata: true
+  timestamp_columns: true
+  output_dir: '/data/trends_results'
+
+bigquery:
+  project_id: '${GOOGLE_CLOUD_PROJECT}'
+  dataset_id: 'trends_production'
+  location: 'US'
+  write_disposition: 'WRITE_APPEND'
+  credentials_path: '${GOOGLE_APPLICATION_CREDENTIALS}'
+  credentials_json: null
