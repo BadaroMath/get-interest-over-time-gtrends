@@ -1,0 +1,25 @@
+analyzer:
+  cache_dir: ./cache
+  cache_enabled: true
+  default_geo: US
+  default_timeframe: today 3-m
+  delay_between_requests: 1.0
+  retry_attempts: 5
+  timeout: 30
+bigquery:
+  credentials_json: null
+  credentials_path: null
+  dataset_id: trends_data
+  location: US
+  project_id: null
+  write_disposition: WRITE_TRUNCATE
+export:
+  default_format: csv
+  include_metadata: false
+  output_dir: ./results
+  timestamp_columns: true
+logging:
+  console: true
+  file: null
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  level: INFO
