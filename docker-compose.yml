@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  trends-analyzer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: trends-analyzer
+    volumes:
+      - ./results:/data/results
+      - ./cache:/data/cache
+      - ./config:/data/config
+    environment:
+      - TRENDS_CACHE_DIR=/data/cache
+      - LOG_LEVEL=INFO
+      - DEFAULT_GEO=US
+      - DEFAULT_TIMEFRAME=today 3-m
+    command: ["trends-analyzer", "--help"]
+    networks:
+      - trends-network
+
+  # Development service with mounted source code
+  trends-analyzer-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: trends-analyzer-dev
+    volumes:
+      - .:/app
+      - ./results:/data/results
+      - ./cache:/data/cache
+      - ./config:/data/config
+    environment:
+      - TRENDS_CACHE_DIR=/data/cache
+      - LOG_LEVEL=DEBUG
+      - PYTHONPATH=/app/src
+    command: ["bash"]
+    stdin_open: true
+    tty: true
+    networks:
+      - trends-network
+
+  # Jupyter notebook for interactive analysis
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: trends-jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+      - ./results:/data/results
+      - ./notebooks:/app/notebooks
+    environment:
+      - TRENDS_CACHE_DIR=/data/cache
+      - JUPYTER_ENABLE_LAB=yes
+    command: >
+      bash -c "pip install jupyter jupyterlab pandas matplotlib seaborn plotly &&
+               jupyter lab --ip=0.0.0.0 --port=8888 --no-browser 
+               --allow-root --NotebookApp.token='' --NotebookApp.password=''"
+    networks:
+      - trends-network
+
+networks:
+  trends-network:
+    driver: bridge
+
+volumes:
+  trends-data:
+    driver: local
